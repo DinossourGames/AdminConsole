@@ -33,25 +33,24 @@
             this.btnPoolEnd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtItemName = new System.Windows.Forms.TextBox();
+            this.txtItemDesc = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtItemDurability = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtItemAttack = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtItemRange = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtItemDefense = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtItemHealth = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txtItemLucky = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.txtMoveSpeed = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.pbStats = new System.Windows.Forms.PictureBox();
+            this.pbAddStatus = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -66,17 +65,28 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbStats)).BeginInit();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.pbServerStatus = new System.Windows.Forms.PictureBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtItemCost = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAddStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbServerStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btnItem
             // 
-            this.btnItem.Location = new System.Drawing.Point(104, 334);
+            this.btnItem.Location = new System.Drawing.Point(86, 334);
             this.btnItem.Name = "btnItem";
-            this.btnItem.Size = new System.Drawing.Size(80, 38);
+            this.btnItem.Size = new System.Drawing.Size(122, 38);
             this.btnItem.TabIndex = 0;
             this.btnItem.Text = "Novo Item";
             this.btnItem.UseVisualStyleBackColor = true;
+            this.btnItem.Click += new System.EventHandler(this.BtnItem_Click);
             // 
             // btnPoolStart
             // 
@@ -115,20 +125,20 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Nome";
             // 
-            // textBox1
+            // txtItemName
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(122, 20);
-            this.textBox1.TabIndex = 5;
+            this.txtItemName.Location = new System.Drawing.Point(86, 43);
+            this.txtItemName.Name = "txtItemName";
+            this.txtItemName.Size = new System.Drawing.Size(122, 20);
+            this.txtItemName.TabIndex = 5;
             // 
-            // textBox2
+            // txtItemDesc
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 69);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(122, 42);
-            this.textBox2.TabIndex = 7;
+            this.txtItemDesc.Location = new System.Drawing.Point(86, 69);
+            this.txtItemDesc.Multiline = true;
+            this.txtItemDesc.Name = "txtItemDesc";
+            this.txtItemDesc.Size = new System.Drawing.Size(122, 42);
+            this.txtItemDesc.TabIndex = 7;
             // 
             // label3
             // 
@@ -139,12 +149,12 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Descrição";
             // 
-            // textBox3
+            // txtItemDurability
             // 
-            this.textBox3.Location = new System.Drawing.Point(86, 117);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(122, 20);
-            this.textBox3.TabIndex = 9;
+            this.txtItemDurability.Location = new System.Drawing.Point(86, 117);
+            this.txtItemDurability.Name = "txtItemDurability";
+            this.txtItemDurability.Size = new System.Drawing.Size(122, 20);
+            this.txtItemDurability.TabIndex = 9;
             // 
             // label4
             // 
@@ -155,22 +165,12 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Durabilidade";
             // 
-            // label5
+            // txtItemAttack
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(83, 140);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 18);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Atributos";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(86, 169);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(122, 20);
-            this.textBox5.TabIndex = 13;
+            this.txtItemAttack.Location = new System.Drawing.Point(86, 169);
+            this.txtItemAttack.Name = "txtItemAttack";
+            this.txtItemAttack.Size = new System.Drawing.Size(122, 20);
+            this.txtItemAttack.TabIndex = 13;
             // 
             // label6
             // 
@@ -181,12 +181,12 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Ataque";
             // 
-            // textBox6
+            // txtItemRange
             // 
-            this.textBox6.Location = new System.Drawing.Point(86, 195);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(122, 20);
-            this.textBox6.TabIndex = 15;
+            this.txtItemRange.Location = new System.Drawing.Point(86, 195);
+            this.txtItemRange.Name = "txtItemRange";
+            this.txtItemRange.Size = new System.Drawing.Size(122, 20);
+            this.txtItemRange.TabIndex = 15;
             // 
             // label7
             // 
@@ -197,12 +197,12 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Range";
             // 
-            // textBox4
+            // txtItemDefense
             // 
-            this.textBox4.Location = new System.Drawing.Point(86, 221);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(122, 20);
-            this.textBox4.TabIndex = 17;
+            this.txtItemDefense.Location = new System.Drawing.Point(86, 221);
+            this.txtItemDefense.Name = "txtItemDefense";
+            this.txtItemDefense.Size = new System.Drawing.Size(122, 20);
+            this.txtItemDefense.TabIndex = 17;
             // 
             // label8
             // 
@@ -213,12 +213,12 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Defesa";
             // 
-            // textBox7
+            // txtItemHealth
             // 
-            this.textBox7.Location = new System.Drawing.Point(86, 247);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(122, 20);
-            this.textBox7.TabIndex = 19;
+            this.txtItemHealth.Location = new System.Drawing.Point(86, 247);
+            this.txtItemHealth.Name = "txtItemHealth";
+            this.txtItemHealth.Size = new System.Drawing.Size(122, 20);
+            this.txtItemHealth.TabIndex = 19;
             // 
             // label9
             // 
@@ -229,12 +229,12 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "Vida";
             // 
-            // textBox8
+            // txtItemLucky
             // 
-            this.textBox8.Location = new System.Drawing.Point(86, 273);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(122, 20);
-            this.textBox8.TabIndex = 21;
+            this.txtItemLucky.Location = new System.Drawing.Point(86, 273);
+            this.txtItemLucky.Name = "txtItemLucky";
+            this.txtItemLucky.Size = new System.Drawing.Size(122, 20);
+            this.txtItemLucky.TabIndex = 21;
             // 
             // label10
             // 
@@ -245,12 +245,12 @@
             this.label10.TabIndex = 20;
             this.label10.Text = "Sorte";
             // 
-            // textBox9
+            // txtMoveSpeed
             // 
-            this.textBox9.Location = new System.Drawing.Point(86, 299);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(122, 20);
-            this.textBox9.TabIndex = 23;
+            this.txtMoveSpeed.Location = new System.Drawing.Point(86, 299);
+            this.txtMoveSpeed.Name = "txtMoveSpeed";
+            this.txtMoveSpeed.Size = new System.Drawing.Size(122, 20);
+            this.txtMoveSpeed.TabIndex = 23;
             // 
             // label11
             // 
@@ -261,13 +261,13 @@
             this.label11.TabIndex = 22;
             this.label11.Text = "Move Speed";
             // 
-            // pbStats
+            // pbAddStatus
             // 
-            this.pbStats.Location = new System.Drawing.Point(18, 334);
-            this.pbStats.Name = "pbStats";
-            this.pbStats.Size = new System.Drawing.Size(42, 38);
-            this.pbStats.TabIndex = 24;
-            this.pbStats.TabStop = false;
+            this.pbAddStatus.Location = new System.Drawing.Point(25, 334);
+            this.pbAddStatus.Name = "pbAddStatus";
+            this.pbAddStatus.Size = new System.Drawing.Size(42, 38);
+            this.pbAddStatus.TabIndex = 24;
+            this.pbAddStatus.TabStop = false;
             // 
             // panel1
             // 
@@ -399,11 +399,97 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(585, 9);
+            this.label21.Location = new System.Drawing.Point(623, 9);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(62, 24);
             this.label21.TabIndex = 37;
             this.label21.Text = "Player";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(507, 60);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(41, 20);
+            this.label22.TabIndex = 38;
+            this.label22.Text = "Item";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(507, 82);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 20);
+            this.label23.TabIndex = 39;
+            this.label23.Text = "Item";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(507, 102);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(41, 20);
+            this.label24.TabIndex = 40;
+            this.label24.Text = "Item";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(507, 125);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(41, 20);
+            this.label25.TabIndex = 41;
+            this.label25.Text = "Item";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(507, 147);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(41, 20);
+            this.label26.TabIndex = 42;
+            this.label26.Text = "Item";
+            // 
+            // pbServerStatus
+            // 
+            this.pbServerStatus.BackColor = System.Drawing.Color.Silver;
+            this.pbServerStatus.Location = new System.Drawing.Point(808, 363);
+            this.pbServerStatus.Name = "pbServerStatus";
+            this.pbServerStatus.Size = new System.Drawing.Size(16, 16);
+            this.pbServerStatus.TabIndex = 43;
+            this.pbServerStatus.TabStop = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(721, 363);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(88, 16);
+            this.label27.TabIndex = 44;
+            this.label27.Text = "Server Status";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtItemCost
+            // 
+            this.txtItemCost.Location = new System.Drawing.Point(86, 144);
+            this.txtItemCost.Name = "txtItemCost";
+            this.txtItemCost.Size = new System.Drawing.Size(122, 20);
+            this.txtItemCost.TabIndex = 45;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(28, 13);
+            this.label5.TabIndex = 46;
+            this.label5.Text = "Cost";
             // 
             // Form1
             // 
@@ -411,6 +497,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(833, 388);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtItemCost);
+            this.Controls.Add(this.pbServerStatus);
+            this.Controls.Add(this.label26);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.textBox10);
@@ -425,33 +519,35 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pbStats);
-            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.pbAddStatus);
+            this.Controls.Add(this.txtMoveSpeed);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txtItemLucky);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.txtItemHealth);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtItemDefense);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txtItemRange);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtItemAttack);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtItemDurability);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtItemDesc);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtItemName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPoolEnd);
             this.Controls.Add(this.btnPoolStart);
             this.Controls.Add(this.btnItem);
+            this.Controls.Add(this.label27);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pbStats)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pbAddStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbServerStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,25 +560,24 @@
         private System.Windows.Forms.Button btnPoolEnd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtItemName;
+        private System.Windows.Forms.TextBox txtItemDesc;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtItemDurability;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtItemAttack;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtItemRange;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtItemDefense;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtItemHealth;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtItemLucky;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox txtMoveSpeed;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.PictureBox pbStats;
+        private System.Windows.Forms.PictureBox pbAddStatus;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
@@ -497,6 +592,15 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.PictureBox pbServerStatus;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox txtItemCost;
+        private System.Windows.Forms.Label label5;
     }
 }
 
