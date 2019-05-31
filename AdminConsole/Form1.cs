@@ -53,11 +53,12 @@ namespace AdminConsole
                 }
             });
 
-            Reference.Child("Gamedata").AsObservable<Player>().Subscribe(play =>
+            Reference.Child("Gamedata1").AsObservable<Player>().Subscribe(play =>
             {
+
                 try
                 {
-                    if (play.Object != null)
+                    if (play.Key == "Player")
                     {
                         if (play.Object.IsPlaying)
                             Player = play.Object;
@@ -77,9 +78,9 @@ namespace AdminConsole
             //Pool part
 
             item1.Text = ix != null ? ix[0].Item.Nome : " --- ";
-            item4.Text = ix != null ? ix[1].Item.Nome : " --- ";
-            item2.Text = ix != null ? ix[2].Item.Nome : " --- ";
-            item3.Text = ix != null ? ix[3].Item.Nome : " --- ";
+            item2.Text = ix != null ? ix[1].Item.Nome : " --- ";
+            item3.Text = ix != null ? ix[2].Item.Nome : " --- ";
+            item4.Text = ix != null ? ix[3].Item.Nome : " --- ";
 
             voto1.Text = ix != null ? ix[0].Votes.ToString() : " -- ";
             voto2.Text = ix != null ? ix[1].Votes.ToString() : " -- ";
@@ -116,8 +117,11 @@ namespace AdminConsole
             var request = new RestRequest("getItens", Method.GET);
             HttpClient.ExecuteAsync(request, r =>
             {
+
+
                 try
                 {
+                    Debug.WriteLine(r.Content);
                     var obj = JObject.Parse(r.Content);
                     var lista = obj["Result"];
                     foreach (var item in lista)
@@ -194,7 +198,7 @@ namespace AdminConsole
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            t.Abort();
+            //t.Abort();
         }
 
         private void BtnPoolStart_Click(object sender, System.EventArgs e)
@@ -255,17 +259,18 @@ namespace AdminConsole
 
             HttpClient = new RestClient(ServerIp);
 
-            t = new Thread(() =>
-            {
-                while (true)
-                {
-                    CheckServer();
-                    Thread.Sleep(10000);
-                }
-            });
-            t.Start();
-
             UpdateList();
+            UpdateUi();
+            //t = new Thread(() =>
+            //{
+            //    while (true)
+            //    {
+            //        CheckServer();
+            //        Thread.Sleep(10000);
+            //    }
+            //});
+            //t.Start();
+
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
