@@ -8,55 +8,130 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Linq;
 using System;
+using Firebase.Database;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AdminConsole
 {
+
+
     public partial class Form1 : Form
     {
-        //public const string ServerIp = "http://177.52.28.212:5000/";
-        public const string ServerIp = "http://127.0.0.1:5000/";
+        public static string ServerIp { get; private set; }
+
+        public async Task GetServerIp()
+        {
+            var a = await Reference.Child("ServerIp").OnceSingleAsync<string>();
+            ServerIp = a;
+            Debug.WriteLine(ServerIp);
+        }
+
         private Thread t;
-        private List<Item> listinha;
+        private List<Item> listinha = new List<Item>();
 
         public RestClient HttpClient { get; private set; }
+        public FirebaseClient Reference { get; private set; }
+        public List<Iten> ix { get; private set; }
+        public Player Player { get; private set; }
+
 
         public Form1()
         {
+            Reference = new FirebaseClient("https://patricioclicker.firebaseio.com/");
             InitializeComponent();
-            HttpClient = new RestClient(ServerIp);
 
-            t = new Thread(() =>
+            Reference.Child("Pool").AsObservable<Pool>().Subscribe(i =>
             {
-                while (true)
+                if (i.Object != null)
                 {
-                    CheckServer();
-                    Thread.Sleep(10000);
+                    ix = i.Object.Items;
+                }
+                else
+                {
+                    ix = null;
                 }
             });
-            // t.Start();
 
-            UpdateList();
+            Reference.Child("Gamedata").AsObservable<Player>().Subscribe(play =>
+            {
+                try
+                {
+                    if (play.Object != null)
+                    {
+                        if (play.Object.IsPlaying)
+                            Player = play.Object;
+                        else
+                            Player = null;
+                    }
+                    else
+                        Player = null;
+                }
+                catch { }
+
+            });
+        }
+
+        private void UpdateUi()
+        {
+            //Pool part
+
+            item1.Text = ix != null ? ix[0].Item.Nome : " --- ";
+            item4.Text = ix != null ? ix[1].Item.Nome : " --- ";
+            item2.Text = ix != null ? ix[2].Item.Nome : " --- ";
+            item3.Text = ix != null ? ix[3].Item.Nome : " --- ";
+
+            voto1.Text = ix != null ? ix[0].Votes.ToString() : " -- ";
+            voto2.Text = ix != null ? ix[1].Votes.ToString() : " -- ";
+            voto3.Text = ix != null ? ix[2].Votes.ToString() : " -- ";
+            voto4.Text = ix != null ? ix[3].Votes.ToString() : " -- ";
+
+            if (!cbUpdate.Checked)
+            {
+                // Player Part
+                pAtk.Text = Player != null ? Player.Atk.ToString() : "";
+                pDef.Text = Player != null ? Player.Def.ToString() : "";
+                pRange.Text = Player != null ? Player.Range.ToString() : "";
+                pLucky.Text = Player != null ? Player.Luck.ToString() : "";
+                pHp.Text = Player != null ? Player.Hp.ToString() : "";
+                pMaxHp.Text = Player != null ? Player.MaxHp.ToString() : "";
+                pSpeed.Text = Player != null ? Player.Speed.ToString() : "";
+                pX.Text = Player != null ? Player.X.ToString() : "";
+                pY.Text = Player != null ? Player.Y.ToString() : "";
+                pOnline.Text = Player != null ? Player.IsPlaying.ToString() : "";
+
+                try
+                {
+                    itemsDetails.Text = Player == null ? "" : $"Nome: {Player.ItemAtual.Nome}\nDescrição: {Player.ItemAtual.Description }\nDurabilidade: {Player.ItemAtual.Durability}\nId: {Player.ItemAtual.Id}\nisLootBox: {Player.ItemAtual.isLootBox}\nPrice: {Player.ItemAtual.price}\n------------BONUS------------\nAtk: {Player.ItemAtual.StatBonus.Atk}\nRange: {Player.ItemAtual.StatBonus.AtkRange}\nDefesa: {Player.ItemAtual.StatBonus.Def}\nHp: {Player.ItemAtual.StatBonus.Hp}\nLuck: {Player.ItemAtual.StatBonus.Luck}\nMove Speed: {Player.ItemAtual.StatBonus.MovSpeed}";
+                }
+                catch { }
+            }
 
         }
 
         private void UpdateList()
         {
+            listinha.Clear();
+            comboBox1.Items.Clear();
             var request = new RestRequest("getItens", Method.GET);
-            listinha = new List<Item>();
             HttpClient.ExecuteAsync(request, r =>
             {
-                var obj = JObject.Parse(r.Content);
-                var lista = obj["Result"];
-                foreach (var item in lista)
+                try
                 {
-                    var i = JsonConvert.DeserializeObject<Item>(item.ToString());
-                    listinha.Add(i);
-                    Invoke((MethodInvoker)delegate
+                    var obj = JObject.Parse(r.Content);
+                    var lista = obj["Result"];
+                    foreach (var item in lista)
                     {
-                        comboBox1.Items.Insert(comboBox1.Items.Count, i.Nome);
-                    });
+                        var i = JsonConvert.DeserializeObject<Item>(item.ToString());
+                        listinha.Add(i);
+                        Invoke((MethodInvoker)delegate
+                        {
+                            comboBox1.Items.Insert(comboBox1.Items.Count, i.Nome);
+                        });
+                    }
                 }
+                catch
+                { }
             });
 
         }
@@ -113,8 +188,8 @@ namespace AdminConsole
                 Thread.Sleep(600);
                 pbAddStatus.BackColor = Color.Gray;
             }).Start();
-
             UpdateList();
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -127,7 +202,12 @@ namespace AdminConsole
             var request = new RestRequest("createPool", Method.GET);
             HttpClient.ExecuteAsync(request, r =>
             {
-                Debug.WriteLine(r.StatusCode);
+                if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                    pbAddStatus.BackColor = Color.Green;
+                else
+                    pbAddStatus.BackColor = Color.Red;
+                Thread.Sleep(600);
+                pbAddStatus.BackColor = Color.Gray;
             });
         }
 
@@ -136,15 +216,20 @@ namespace AdminConsole
             var request = new RestRequest("finishPool", Method.GET);
             HttpClient.ExecuteAsync(request, r =>
             {
-                Debug.WriteLine(r.StatusCode);
+                if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                    pbAddStatus.BackColor = Color.Green;
+                else
+                    pbAddStatus.BackColor = Color.Red;
+                Thread.Sleep(600);
+                pbAddStatus.BackColor = Color.Gray;
             });
-
+            UpdateList();
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             var request = new RestRequest("finishPool", Method.POST);
-           
+
             string jsonFile = JsonConvert.SerializeObject(listinha[comboBox1.SelectedIndex]);
             Debug.WriteLine(jsonFile);
             request.AddParameter("application/json; charset=utf-8", jsonFile, ParameterType.RequestBody);
@@ -152,8 +237,103 @@ namespace AdminConsole
 
             HttpClient.ExecuteAsync(request, r =>
             {
-                Debug.WriteLine(r.StatusCode);
+                if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                    pbAddStatus.BackColor = Color.Green;
+                else
+                    pbAddStatus.BackColor = Color.Red;
+                Thread.Sleep(600);
+                pbAddStatus.BackColor = Color.Gray;
             });
+
+            UpdateList();
+
         }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await GetServerIp();
+
+            HttpClient = new RestClient(ServerIp);
+
+            t = new Thread(() =>
+            {
+                while (true)
+                {
+                    CheckServer();
+                    Thread.Sleep(10000);
+                }
+            });
+            t.Start();
+
+            UpdateList();
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateUi();
+        }
+
+        private void CbUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (cbUpdate.Checked)
+            {
+                try
+                {
+                    var p = new Player
+                    {
+                        IsPlaying = Player.IsPlaying,
+                        ItemAtual = Player.ItemAtual,
+                        PoolResult = Player.PoolResult,
+                        Atk = int.Parse(pAtk.Text),
+                        Def = int.Parse(pDef.Text),
+                        Hp = int.Parse(pHp.Text),
+                        MaxHp = int.Parse(pMaxHp.Text),
+                        Luck = int.Parse(pLucky.Text),
+                        Range = int.Parse(pRange.Text),
+                        Speed = int.Parse(pSpeed.Text),
+                        R = 1
+                    };
+
+
+                    var request = new RestRequest("updatePlayer", Method.POST);
+
+                    string jsonFile = JsonConvert.SerializeObject(p);
+                    Debug.WriteLine(jsonFile);
+                    request.AddParameter("application/json; charset=utf-8", jsonFile, ParameterType.RequestBody);
+                    request.RequestFormat = DataFormat.Json;
+
+                    HttpClient.ExecuteAsync(request, r =>
+                    {
+                        if (r.StatusCode == System.Net.HttpStatusCode.OK)
+                            pbAddStatus.BackColor = Color.Green;
+                        else
+                            pbAddStatus.BackColor = Color.Red;
+                        Thread.Sleep(600);
+                        pbAddStatus.BackColor = Color.Gray;
+                    });
+
+
+                }
+                catch { }
+
+            }
+        }
+    }
+
+    public class Pool
+    {
+        public List<Iten> Items { get; set; }
+        public string Id { get; set; }
+    }
+
+    public class Iten
+    {
+        public Item Item { get; set; }
+        public int Votes { get; set; }
     }
 }
