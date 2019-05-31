@@ -62,7 +62,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -74,13 +73,17 @@
             this.label27 = new System.Windows.Forms.Label();
             this.txtItemCost = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtImageUrl = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbAddStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbServerStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btnItem
             // 
-            this.btnItem.Location = new System.Drawing.Point(86, 334);
+            this.btnItem.Location = new System.Drawing.Point(86, 400);
             this.btnItem.Name = "btnItem";
             this.btnItem.Size = new System.Drawing.Size(122, 38);
             this.btnItem.TabIndex = 0;
@@ -96,6 +99,7 @@
             this.btnPoolStart.TabIndex = 1;
             this.btnPoolStart.Text = "Criar Pool";
             this.btnPoolStart.UseVisualStyleBackColor = true;
+            this.btnPoolStart.Click += new System.EventHandler(this.BtnPoolStart_Click);
             // 
             // btnPoolEnd
             // 
@@ -105,6 +109,7 @@
             this.btnPoolEnd.TabIndex = 2;
             this.btnPoolEnd.Text = "Encerrar Pool";
             this.btnPoolEnd.UseVisualStyleBackColor = true;
+            this.btnPoolEnd.Click += new System.EventHandler(this.BtnPoolEnd_Click);
             // 
             // label1
             // 
@@ -263,7 +268,7 @@
             // 
             // pbAddStatus
             // 
-            this.pbAddStatus.Location = new System.Drawing.Point(25, 334);
+            this.pbAddStatus.Location = new System.Drawing.Point(25, 400);
             this.pbAddStatus.Name = "pbAddStatus";
             this.pbAddStatus.Size = new System.Drawing.Size(42, 38);
             this.pbAddStatus.TabIndex = 24;
@@ -379,13 +384,7 @@
             this.button1.TabIndex = 35;
             this.button1.Text = "Encerrar Pool Com Item";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(341, 281);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(122, 20);
-            this.textBox10.TabIndex = 36;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // panel2
             // 
@@ -458,7 +457,7 @@
             // pbServerStatus
             // 
             this.pbServerStatus.BackColor = System.Drawing.Color.Silver;
-            this.pbServerStatus.Location = new System.Drawing.Point(808, 363);
+            this.pbServerStatus.Location = new System.Drawing.Point(816, 447);
             this.pbServerStatus.Name = "pbServerStatus";
             this.pbServerStatus.Size = new System.Drawing.Size(16, 16);
             this.pbServerStatus.TabIndex = 43;
@@ -468,7 +467,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(721, 363);
+            this.label27.Location = new System.Drawing.Point(729, 447);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(88, 16);
             this.label27.TabIndex = 44;
@@ -491,12 +490,50 @@
             this.label5.TabIndex = 46;
             this.label5.Text = "Cost";
             // 
+            // txtImageUrl
+            // 
+            this.txtImageUrl.Location = new System.Drawing.Point(86, 325);
+            this.txtImageUrl.Name = "txtImageUrl";
+            this.txtImageUrl.Size = new System.Drawing.Size(122, 20);
+            this.txtImageUrl.TabIndex = 48;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(15, 328);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(61, 13);
+            this.label28.TabIndex = 47;
+            this.label28.Text = "Image URL";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(86, 365);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(93, 17);
+            this.checkBox1.TabIndex = 49;
+            this.checkBox1.Text = "IsLootBoxItem";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(342, 281);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 50;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(833, 388);
+            this.ClientSize = new System.Drawing.Size(841, 472);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.txtImageUrl);
+            this.Controls.Add(this.label28);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtItemCost);
             this.Controls.Add(this.pbServerStatus);
@@ -507,7 +544,6 @@
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.textBox10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label18);
@@ -589,7 +625,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
@@ -601,6 +636,10 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox txtItemCost;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtImageUrl;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
